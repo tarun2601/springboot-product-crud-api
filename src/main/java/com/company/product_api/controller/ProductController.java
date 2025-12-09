@@ -1,5 +1,6 @@
 package com.company.product_api.controller;
 
+import com.company.product_api.dto.Constant;
 import com.company.product_api.dto.JsonResponse;
 import com.company.product_api.dto.ProductDTO;
 import com.company.product_api.model.Product;
@@ -27,9 +28,9 @@ public class ProductController {
         List<Product> products = productService.getAllProducts();
         JsonResponse<List<Product>> response;
         if (products.isEmpty()) {
-            response = new JsonResponse<>("No products found");
+            response = new JsonResponse<>(Constant.NO_PRODUCT_FOUND);
         } else {
-            response = new JsonResponse<>("Products retrieved successfully");
+            response = new JsonResponse<>(Constant.PRODUCTS_RETRIEVED);
         }
         response.setData(products);
         response.setSuccess(true);
@@ -42,7 +43,7 @@ public class ProductController {
     public ResponseEntity<JsonResponse<Product>> getProductById(@PathVariable Long id) {
         Product product = productService.getProductById(id);
 
-        JsonResponse<Product> response = new JsonResponse<>("Product retrieved successfully");
+        JsonResponse<Product> response = new JsonResponse<>(Constant.PRODUCT_RETRIEVED);
         response.setData(product);
         response.setSuccess(true);
 
@@ -54,7 +55,7 @@ public class ProductController {
     public ResponseEntity<JsonResponse<Product>> createProduct(@Valid @RequestBody ProductDTO product) {
         Product createdProduct = productService.createProduct(product);
 
-        JsonResponse<Product> response = new JsonResponse<>("Product created successfully");
+        JsonResponse<Product> response = new JsonResponse<>(Constant.PRODUCT_CREATED);
         response.setData(createdProduct);
         response.setSuccess(true);
 
@@ -69,7 +70,7 @@ public class ProductController {
 
         Product updatedProduct = productService.updateProduct(id, product);
 
-        JsonResponse<Product> response = new JsonResponse<>("Product updated successfully");
+        JsonResponse<Product> response = new JsonResponse<>(Constant.PRODUCT_UPDATED);
         response.setData(updatedProduct);
         response.setSuccess(true);
 
@@ -82,9 +83,8 @@ public class ProductController {
 
         productService.deleteProduct(id);
 
-        JsonResponse<Void> response = new JsonResponse<>("Product deleted successfully");
+        JsonResponse<Void> response = new JsonResponse<>(Constant.PRODUCT_DELETED);
         response.setSuccess(true);
-        response.setData(null);
 
         return ResponseEntity.ok(response);
     }

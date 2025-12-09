@@ -38,7 +38,6 @@ public class GlobalExceptionHandler {
     public ResponseEntity<JsonResponse<String>> handleResourceNotFoundException(ResourceNotFoundException ex) {
         log.info("In Resource Not Found Exception {}",ex.getMessage());
         JsonResponse<String> response = new JsonResponse<>("Resource Not Found");
-        response.setData(null);
         response.setSuccess(false);
         response.setDebugMessage(ex.getMessage());
 

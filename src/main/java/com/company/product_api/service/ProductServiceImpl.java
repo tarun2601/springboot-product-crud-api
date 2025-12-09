@@ -1,5 +1,6 @@
 package com.company.product_api.service;
 
+import com.company.product_api.dto.Constant;
 import com.company.product_api.dto.ProductDTO;
 import com.company.product_api.exception.ResourceNotFoundException;
 import com.company.product_api.model.Product;
@@ -25,7 +26,7 @@ public class ProductServiceImpl implements ProductService {
     public Product getProductById(Long id) {
         return productRepository.findById(id)
                 .orElseThrow(() ->
-                        new ResourceNotFoundException("Product not found for id: " + id)
+                        new ResourceNotFoundException(Constant.PRODUCT_NOT_FOUND + id)
                 );
     }
 
@@ -56,7 +57,7 @@ public class ProductServiceImpl implements ProductService {
 
         Product product = productRepository.findById(id)
                 .orElseThrow(() ->
-                        new ResourceNotFoundException("Product not found for id: " + id)
+                        new ResourceNotFoundException(Constant.PRODUCT_NOT_FOUND + id)
                 );
 
         product.setName(dto.getName());
@@ -74,7 +75,7 @@ public class ProductServiceImpl implements ProductService {
 
         Product product = productRepository.findById(id)
                 .orElseThrow(() ->
-                        new ResourceNotFoundException("Product not found for id: " + id)
+                        new ResourceNotFoundException(Constant.PRODUCT_NOT_FOUND + id)
                 );
 
         productRepository.delete(product);
