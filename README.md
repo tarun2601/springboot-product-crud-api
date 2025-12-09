@@ -68,8 +68,8 @@ This project includes basic authentication with in-memory users and role-based A
 Two users are configured:
 
     Username	Password	    Role
-    admin	        admin123	    ADMIN
-    user	        user123	            USER
+    admin	    admin123	    ADMIN
+    user	    user123	        USER
 
 ### Security Rules
 
@@ -88,17 +88,17 @@ Protected API Access
 
 - USER can only perform GET requests:
 
-        Method	    Endpoint	        Access
-        GET	            /products/**     USER, ADMIN
+        Method	    Endpoint	       Access
+        GET	        /products/**     USER, ADMIN
 
 #### ADMIN Role (Full CRUD access)
 
 - ADMIN can perform ALL operations:
 
         Method	Endpoint	    Access
-        POST	        /products/**	    ADMIN
-        PUT	        /products/**	    ADMIN
-        DELETE	/products/**	    ADMIN
+        POST	/products/**	ADMIN
+        PUT	    /products/**	ADMIN
+        DELETE	/products/**	ADMIN
 
 -------------------------------------------------------------------------------------------
 
