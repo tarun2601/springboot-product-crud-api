@@ -56,7 +56,7 @@ public class GlobalExceptionHandler {
                 .reduce((a, b) -> a + ", " + b)
                 .orElse("Validation failed");
 
-        JsonResponse<String> response = new JsonResponse<>("Validation Error");
+        JsonResponse<String> response = new JsonResponse<>("Validation Failed");
         response.setData(errorMessage);
         response.setSuccess(false);
         response.setDebugMessage(ex.getMessage());
@@ -69,7 +69,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<JsonResponse<String>> handleGenericException(Exception ex) {
         log.info("In Generic Exception {}",ex.getMessage());
-        JsonResponse<String> response = new JsonResponse<>("An unexpected error occurred", ex);
+        JsonResponse<String> response = new JsonResponse<>("Something went wrong !", ex);
         response.setSuccess(false);
 
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);

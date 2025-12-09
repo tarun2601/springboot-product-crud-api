@@ -25,7 +25,7 @@ public class ProductServiceImpl implements ProductService {
     public Product getProductById(Long id) {
         return productRepository.findById(id)
                 .orElseThrow(() ->
-                        new ResourceNotFoundException("Product not found with id: " + id)
+                        new ResourceNotFoundException("Product not found for id: " + id)
                 );
     }
 
@@ -56,7 +56,7 @@ public class ProductServiceImpl implements ProductService {
 
         Product product = productRepository.findById(id)
                 .orElseThrow(() ->
-                        new ResourceNotFoundException("Product not found with id: " + id)
+                        new ResourceNotFoundException("Product not found for id: " + id)
                 );
 
         product.setName(dto.getName());
@@ -74,10 +74,11 @@ public class ProductServiceImpl implements ProductService {
 
         Product product = productRepository.findById(id)
                 .orElseThrow(() ->
-                        new ResourceNotFoundException("Product not found with id: " + id)
+                        new ResourceNotFoundException("Product not found for id: " + id)
                 );
 
         productRepository.delete(product);
     }
 }
+
 

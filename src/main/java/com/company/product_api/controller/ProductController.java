@@ -25,8 +25,12 @@ public class ProductController {
     @GetMapping
     public ResponseEntity<JsonResponse<List<Product>>> getAllProducts() {
         List<Product> products = productService.getAllProducts();
-
-        JsonResponse<List<Product>> response = new JsonResponse<>("Products retrieved successfully");
+        JsonResponse<List<Product>> response;
+        if (products.isEmpty()) {
+            response = new JsonResponse<>("No products found");
+        } else {
+            response = new JsonResponse<>("Products retrieved successfully");
+        }
         response.setData(products);
         response.setSuccess(true);
 
@@ -82,6 +86,6 @@ public class ProductController {
         response.setSuccess(true);
         response.setData(null);
 
-        return new ResponseEntity<>(response, HttpStatus.NO_CONTENT);
+        return ResponseEntity.ok(response);
     }
 }
