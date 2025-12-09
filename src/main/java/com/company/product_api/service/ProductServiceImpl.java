@@ -8,7 +8,7 @@ import com.company.product_api.repository.ProductRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.List;
 
 @Service
@@ -45,7 +45,7 @@ public class ProductServiceImpl implements ProductService {
         product.setName(dto.getName());
         product.setPrice(dto.getPrice());
         product.setDescription(dto.getDescription());
-        product.setCreatedAt(LocalDateTime.now());
+        product.setCreatedAt(Instant.now());
 
         return productRepository.save(product);
     }
@@ -63,7 +63,7 @@ public class ProductServiceImpl implements ProductService {
         product.setName(dto.getName());
         product.setPrice(dto.getPrice());
         product.setDescription(dto.getDescription());
-        product.setUpdatedAt(LocalDateTime.now());
+        product.setUpdatedAt(Instant.now());
 
         return productRepository.save(product);
     }

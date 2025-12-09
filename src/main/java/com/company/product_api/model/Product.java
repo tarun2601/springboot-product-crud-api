@@ -3,6 +3,8 @@ package com.company.product_api.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+
+import java.time.Instant;
 import java.time.LocalDateTime;
 
 @Entity
@@ -25,8 +27,8 @@ public class Product {
     private String description;
 
     @Column(name = "created_at")
-    private LocalDateTime createdAt = LocalDateTime.now();
+    private Instant createdAt = Instant.now();
 
     @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
+    private Instant updatedAt;
 }

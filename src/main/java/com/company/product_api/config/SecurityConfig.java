@@ -2,6 +2,7 @@ package com.company.product_api.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -43,26 +44,27 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
         http
-            .csrf(csrf -> csrf.disable())
-            .sessionManagement(session -> session
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-            )
-            .authorizeHttpRequests(auth -> auth
-                // allow public access to Swagger/OpenAPI
-                .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html", "/api-docs/**").permitAll()
-                // allow GET requests to all authenticated users (read-only access)
-                .requestMatchers("GET", "/products/**").hasAnyRole("USER", "ADMIN")
-                // require admin role for POST, PUT, DELETE operations
-                .requestMatchers("POST", "/products/**").hasRole("ADMIN")
-                .requestMatchers("PUT", "/products/**").hasRole("ADMIN")
-                .requestMatchers("DELETE", "/products/**").hasRole("ADMIN")
-                .anyRequest().authenticated()
-            )
-            .httpBasic(httpBasic -> {});
+                .csrf(csrf -> csrf.disable())
+                .sessionManagement(session -> session
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                )
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html", "/api-docs/**").permitAll()
+
+                        .requestMatchers(HttpMethod.GET, "/products/**").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/products/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/products/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/products/**").hasRole("ADMIN")
+
+                        .anyRequest().authenticated()
+                )
+                .httpBasic(httpBasic -> {});
 
         return http.build();
     }
+
 }
 
 
